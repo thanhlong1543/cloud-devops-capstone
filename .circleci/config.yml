@@ -32,7 +32,7 @@ jobs:
           name: Linting step
           command: |
             cd react-template
-            yarn run eslint . --ext .js --max-warnings=0
+            yarn run eslint . --ext .js --max-warnings=12
 
   build-docker:
     docker:
@@ -115,7 +115,7 @@ jobs:
       - kubernetes/create-or-update-resource:
           get-rollout-status: true
           resource-file-path: react-template/deployment.yaml
-          resource-name: deployment/capstone-frontend-app
+          resource-name: deployment/capstone-frontend-deployment
           
 workflows:
   default:
@@ -124,13 +124,12 @@ workflows:
       - linting
       - build-docker:
           requires: [build-webapp]
-      # - aws-eks/create-cluster:
-      #     cluster-name: my-eks-capstone
-      - test-cluster:
-          cluster-name: my-eks-capstone
-          # requires:
-          #   - aws-eks/create-cluster
+      #Only create the cluter one time
+#      - aws-eks/create-cluster:
+#          cluster-name: my-eks-capstone
+#      - test-cluster:
+#          cluster-name: my-eks-capstone
+#          requires:
+#            - aws-eks/create-cluster
       - create-deployment:
           cluster-name: my-eks-capstone
-          # requires:
-          #   - aws-eks/create-cluster
