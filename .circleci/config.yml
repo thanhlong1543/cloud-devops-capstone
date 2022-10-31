@@ -99,7 +99,7 @@ jobs:
             kubectl get services
           name: Test cluster
 
-  create-deployment:
+  create-or-update-deployment:
     docker:
       - image: 'cimg/python:3.10'
     parameters:
@@ -131,5 +131,6 @@ workflows:
 #          cluster-name: my-eks-capstone
 #          requires:
 #            - aws-eks/create-cluster
-      - create-deployment:
+      - create-or-update-deployment:
           cluster-name: my-eks-capstone
+          requires: [build-docker]
