@@ -4,7 +4,6 @@ metadata:
   name: capstone-frontend-deployment
   labels:
     app: capstone-frontend-app
-  namespace: capstone-frontend
 spec:
   replicas: 2
   selector:
