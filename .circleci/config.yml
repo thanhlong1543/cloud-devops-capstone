@@ -7,15 +7,15 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          keys: [react-appp-build]
+          keys: [react-app-build]
       - run:
           name: Build front-end
           command: |
-            cd react-appp
+            cd react-app
             npm run build
       - save_cache:
-          paths: [react-appp/node_modules]
-          key: react-appp-build
+          paths: [react-app/node_modules]
+          key: react-app-build
 
   
 workflows:
