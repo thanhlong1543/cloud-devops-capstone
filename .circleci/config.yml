@@ -12,11 +12,6 @@ jobs:
       - checkout
       - restore_cache:
           keys: [react-template-build]
-      # - run:
-      #     name: run lint
-      #     command: |
-      #       . venv/bin/activate
-      #       make lint      
       - run:
           name: Build front-end
           command: |
@@ -26,6 +21,18 @@ jobs:
       - save_cache:
           paths: [react-template/node_modules]
           key: react-template-build
+  linting:
+    docker:
+      - image: node:14-alpine
+    steps:
+      - checkout
+      - restore_cache:
+          keys: [react-template-build]
+      - run:
+          name: Linting step
+          command: |
+            cd react-template
+            yarn run eslint . --ext .js
 
   build-docker:
     docker:

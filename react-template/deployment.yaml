@@ -1,21 +1,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: capstone-frontend
+  name: capstone-frontend-deployment
   labels:
-    app: capstone-frontend
+    app: capstone-frontend-app
+  namespace: capstone-frontend
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: capstone-frontend
+      app: capstone-frontend-app
   template:
     metadata:
       labels:
-        app: capstone-frontend
+        app: capstone-frontend-app
     spec:
       containers:
-        - name: capstone-frontend
+        - name: capstone-frontend-app
           imagePullPolicy: Always
           image: thanhlong1543/cloud-devops-capstone:0.1.23
-          
+          ports:
+            - name: tcp
+              containerPort: 3000
