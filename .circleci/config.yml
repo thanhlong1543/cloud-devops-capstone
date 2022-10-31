@@ -7,15 +7,15 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          keys: [react-app-build]
+          keys: [react-template-build]
       - run:
           name: Build front-end
           command: |
-            cd react-app
+            cd react-template
             npm run build
       - save_cache:
-          paths: [react-app/node_modules]
-          key: react-app-build
+          paths: [react-template/node_modules]
+          key: react-template-build
 
   
 workflows:
