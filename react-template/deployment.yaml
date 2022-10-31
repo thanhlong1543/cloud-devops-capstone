@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: capstone-frontend
+  labels:
+    app: capstone-frontend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: capstone-frontend
+  template:
+    metadata:
+      labels:
+        app: capstone-frontend
+    spec:
+      containers:
+        - name: capstone-frontend
+          imagePullPolicy: Always
+          image: thanhlong1543/cloud-devops-capstone:0.1.23
+          
