@@ -10,18 +10,17 @@ jobs:
       - checkout
       - restore_cache:
           keys: [react-template-build]
-      - run:
-          name: run lint
-          command: |
-            . venv/bin/activate
-            make lint      
+      # - run:
+      #     name: run lint
+      #     command: |
+      #       . venv/bin/activate
+      #       make lint      
       - run:
           name: Build front-end
           command: |
             cd react-template
             yarn
             yarn build
-      
       - save_cache:
           paths: [react-template/node_modules]
           key: react-template-build
