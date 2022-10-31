@@ -1,0 +1,24 @@
+version: 2.1
+
+jobs:
+  build-webapp:
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+      - checkout
+      - restore_cache:
+          keys: [react-appp-build]
+      - run:
+          name: Build front-end
+          command: |
+            cd react-appp
+            npm run build
+      - save_cache:
+          paths: [react-appp/node_modules]
+          key: react-appp-build
+
+  
+workflows:
+  default:
+    jobs:
+      - build-webapp
