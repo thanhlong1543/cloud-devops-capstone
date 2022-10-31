@@ -35,7 +35,7 @@ jobs:
             - v1-{{ .Branch }}
             - react-template-build
           paths:
-            - /caches/app.tar
+            - /caches/cloud-devops-capstone.tar
             - react-template/node_modules
       - run:
           name: Install dependencies
@@ -49,7 +49,7 @@ jobs:
           name: Load Docker image layer cache
           command: |
             set +o pipefail
-            docker load -i /caches/app.tar | true
+            docker load -i /caches/cloud-devops-capstone.tar | true
       - run:
           name: Build application Docker image
           command: |
@@ -58,11 +58,11 @@ jobs:
           name: Save Docker image layer cache
           command: |
             mkdir -p /caches
-            docker save -o /caches/app.tar app      
+            docker save -o /caches/cloud-devops-capstone.tar cloud-devops-capstone      
       - save_cache:
           key: v1-{{ .Branch }}-{{ epoch }}
           paths:
-            - /caches/app.tar
+            - /caches/cloud-devops-capstone.tar
       - run:
           name: Push docker image to Docker hub
           command: |
