@@ -12,7 +12,8 @@ jobs:
           name: Build front-end
           command: |
             cd react-template
-            npm run build
+            yarn
+            yarn build
       - save_cache:
           paths: [react-template/node_modules]
           key: react-template-build
