@@ -115,12 +115,13 @@ jobs:
       - kubernetes/create-or-update-resource:
           get-rollout-status: true
           resource-file-path: react-template/deployment.yaml
-          resource-name: deployment/capstone-frontend
+          resource-name: deployment/capstone-frontend-app
           
 workflows:
   default:
     jobs:
       - build-webapp
+      - linting
       - build-docker:
           requires: [build-webapp]
       # - aws-eks/create-cluster:
