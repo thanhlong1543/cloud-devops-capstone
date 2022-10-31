@@ -52,7 +52,8 @@ jobs:
       - run:
           name: Build application Docker image
           command: |
-            docker build -t cloud-devops-capstone ./react-template
+            cd react-template
+            docker build -t cloud-devops-capstone .
       - run:
           name: Save Docker image layer cache
           command: |
