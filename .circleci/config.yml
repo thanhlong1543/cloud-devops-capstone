@@ -32,7 +32,7 @@ jobs:
           name: Linting step
           command: |
             cd react-template
-            yarn run eslint . --ext .js
+            yarn run eslint . --ext .js --max-warnings=0
 
   build-docker:
     docker:
