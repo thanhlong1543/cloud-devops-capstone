@@ -75,5 +75,5 @@ workflows:
   default:
     jobs:
       - build-webapp
-      - build-docker
+      - build-docker:
           requires: [build-webapp]
