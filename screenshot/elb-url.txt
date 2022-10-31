@@ -1,0 +1,2 @@
+[elastic load balancer url after expose the deployment]
+http://a9189b32ce7c541c1be89cd00ad8d1ef-674528399.us-east-1.elb.amazonaws.com:3000/
