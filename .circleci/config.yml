@@ -67,7 +67,7 @@ jobs:
           name: Push docker image to Docker hub
           command: |
             TAG=0.1.$CIRCLE_BUILD_NUM
-            echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
+            docker login -u $DOCKER_USER -p $DOCKER_PASS
             docker login && docker tag cloud-devops-capstone $TAG
             docker push thanhlong1543/cloud-devops-capstone:$TAG
   
