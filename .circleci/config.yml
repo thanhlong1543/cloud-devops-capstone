@@ -3,7 +3,6 @@ version: 2.1
 jobs:
 
   build-webapp:
-    working_directory: /app
     docker:
       - image: node:14-alpine
     steps:
@@ -26,7 +25,6 @@ jobs:
           key: react-template-build
 
   build-docker:
-    working_directory: /app
     docker:
       - image: docker:17.05.0-ce-git
     steps:
@@ -77,3 +75,4 @@ workflows:
     jobs:
       - build-webapp
       - build-docker
+          requires: [build-webapp]
