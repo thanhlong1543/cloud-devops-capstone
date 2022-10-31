@@ -1,7 +1,9 @@
 version: 2.1
 
 jobs:
+
   build-webapp:
+    working_directory: /app
     docker:
       - image: node:14-alpine
     steps:
@@ -9,15 +11,67 @@ jobs:
       - restore_cache:
           keys: [react-template-build]
       - run:
+          name: run lint
+          command: |
+            . venv/bin/activate
+            make lint      
+      - run:
           name: Build front-end
           command: |
             cd react-template
             yarn
             yarn build
+      
       - save_cache:
           paths: [react-template/node_modules]
           key: react-template-build
 
+  build-docker:
+    working_directory: /app
+    docker:
+      - image: docker:17.05.0-ce-git
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-{{ .Branch }}
+            - react-template-build
+          paths:
+            - /caches/app.tar
+            - react-template/node_modules
+      - run:
+          name: Install dependencies
+          command: |
+            apk add --no-cache \
+              py-pip=9.0.0-r1
+            pip install \
+              docker-compose==1.12.0 \
+              awscli==1.11.76 
+      - run:
+          name: Load Docker image layer cache
+          command: |
+            set +o pipefail
+            docker load -i /caches/app.tar | true
+      - run:
+          name: Build application Docker image
+          command: |
+            docker build -t cloud-devops-capstone ./react-template
+      - run:
+          name: Save Docker image layer cache
+          command: |
+            mkdir -p /caches
+            docker save -o /caches/app.tar app      
+      - save_cache:
+          key: v1-{{ .Branch }}-{{ epoch }}
+          paths:
+            - /caches/app.tar
+      - run:
+          name: Push docker image to Docker hub
+          command: |
+            TAG=0.1.$CIRCLE_BUILD_NUM
+            echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
+            docker login && docker tag cloud-devops-capstone $TAG
+            docker push thanhlong1543/cloud-devops-capstone:$TAG
   
 workflows:
   default:
