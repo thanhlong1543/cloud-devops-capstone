@@ -126,9 +126,9 @@ workflows:
           requires: [build-webapp]
 #      Only create the cluter one time
       - aws-eks/create-cluster:
-          cluster-name: my-eks-capstone
+          cluster-name: my-eks-capstone-02
       - test-cluster:
-          cluster-name: my-eks-capstone
+          cluster-name: my-eks-capstone-02
           requires:
             - aws-eks/create-cluster
       - create-or-update-deployment:
