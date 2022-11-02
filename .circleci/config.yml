@@ -124,13 +124,13 @@ workflows:
       - linting
       - build-docker:
           requires: [build-webapp]
-      #Only create the cluter one time
-#      - aws-eks/create-cluster:
-#          cluster-name: my-eks-capstone
-#      - test-cluster:
-#          cluster-name: my-eks-capstone
-#          requires:
-#            - aws-eks/create-cluster
+#      Only create the cluter one time
+      - aws-eks/create-cluster:
+          cluster-name: my-eks-capstone
+      - test-cluster:
+          cluster-name: my-eks-capstone
+          requires:
+            - aws-eks/create-cluster
       - create-or-update-deployment:
           cluster-name: my-eks-capstone
           requires: [build-docker]
