@@ -4,7 +4,7 @@
 udacity cloud devops capstone project
 
 -------------
-What I do in this project:
+What I do in this project: <br />
 1/ Using react template in the internet <br />
 2/ Dockerize the react app in pipeline after building and linting successfully in the CI<br />
 3/ Push image to the docker hub <br />
