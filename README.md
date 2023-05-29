@@ -5,9 +5,9 @@ udacity cloud devops capstone project
 
 -------------
 What I do in this project:
-1/ Using react template in the internet
-2/ Dockerize the react app in pipeline after building and linting successfully in the CI
-3/ Push image to the docker hub
-4/ Create EKS Cluster
-5/ Create or rollout the deployment when new code pushed to the repo
-6/ Manually expose the ELB for the deployment
+1/ Using react template in the internet <br />
+2/ Dockerize the react app in pipeline after building and linting successfully in the CI<br />
+3/ Push image to the docker hub <br />
+4/ Create EKS Cluster <br />
+5/ Create or rollout the deployment when new code pushed to the repo <br />
+6/ Manually expose the ELB for the deployment <br />
